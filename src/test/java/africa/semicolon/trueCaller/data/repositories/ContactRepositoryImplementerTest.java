@@ -72,7 +72,57 @@ class ContactRepositoryImplementerTest {
 		assertEquals("Samson", foundContact1.getFirstName());
 
 		assertEquals(2, foundContact2.getId());
-		assertEquals("Adesoba", contactRepository.findById(2).getFirstName());
+		assertEquals("Adesoba", foundContact2.getFirstName());
 	}
+
+	@Test public void saveContact_findByPhoneNumberReturnsContactTest(){
+		Contact contact1 = new Contact();
+
+		contact1.setPhoneNumber("090");
+		contactRepository.save(contact1);
+		Contact foundContact1 = contactRepository.findById(1);
+
+		assertEquals(1, foundContact1.getId());
+		assertEquals("090", foundContact1.getPhoneNumber());
+	}
+
+	@Test public void saveContact_deleteContactTest(){
+		Contact contact1 = new Contact();
+		Contact contact2 = new Contact();
+
+		contact1.setFirstName("Samson");
+		contactRepository.save(contact1);
+		Contact foundContact1 = contactRepository.findById(1);
+
+		contact2.setFirstName("Adesoba");
+		contactRepository.save(contact2);
+		Contact foundContact2 = contactRepository.findById(2);
+
+
+		assertEquals(1, foundContact1.getId());
+		assertEquals("Samson", foundContact1.getFirstName());
+
+
+		contactRepository.deleteContact(contact1);
+		assertEquals(1, contactRepository.count());
+	}
+
+	@Test public void saveContact_EditFirstNameTest(){
+		Contact contact1 = new Contact();
+
+		contact1.setFirstName("Samson");
+		contactRepository.save(contact1);
+		Contact foundContact1 = contactRepository.findByFirstName("Samson");
+
+		assertEquals(1, foundContact1.getId());
+		assertEquals("Samson", foundContact1.getFirstName());
+
+		contactRepository.update("Samson", "Adesoba");
+		contactRepository.save(contact1);
+		assertEquals("Adesoba", foundContact1.getFirstName());
+
+
+	}
+
 
 }

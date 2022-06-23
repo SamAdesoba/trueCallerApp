@@ -1,13 +1,16 @@
 package africa.semicolon.trueCaller.data.models;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
+
 public class Contact {
-	private int id;
+	@Id
+	private String id;
 	@NonNull
 	private String firstName;
 	@NonNull
