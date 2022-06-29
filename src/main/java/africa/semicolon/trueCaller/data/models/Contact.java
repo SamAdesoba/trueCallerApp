@@ -2,21 +2,24 @@ package africa.semicolon.trueCaller.data.models;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
-
+@Document
 public class Contact {
 	@Id
 	private String id;
-	@NonNull
 	private String firstName;
-	@NonNull
 	private String lastName;
-	@NonNull
 	private String phoneNumber;
+
+	public Contact(String firstName, String lastName, String phoneNumber) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+	}
 
 
 }
